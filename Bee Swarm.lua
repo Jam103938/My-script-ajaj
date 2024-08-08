@@ -141,7 +141,7 @@ Farm:AddDropdown({
 Farm:AddDropdown({
     Name = "Select Farm Mode",
     Default = "Tween",
-    Options = {"Tween", "TweenFast", "Walk"},
+    Options = {"Tween", "TweenFast"},
     Callback = function(Value)
         selectedFarm = Value
     end
@@ -195,14 +195,10 @@ Farm:AddToggle({
             elseif selectedFarm == "TweenFast" then
                 shared.a12 = true
                 startTweenFastFarm()
-            elseif selectedFarm == "Walk" then
-                shared.a13 = true
-                startWalkFarm()
             end
         else
             shared.a11 = false
             shared.a12 = false
-            shared.a13 = false
         end
     end
 })
