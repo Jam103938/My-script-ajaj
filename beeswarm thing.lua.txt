@@ -19,6 +19,7 @@ local togglestore = {
     CollectHiddenStickers = false
 }
 
+-- Function to collect hidden stickers
 task.spawn(function()
     repeat
         if togglestore.CollectHiddenStickers then
@@ -33,24 +34,29 @@ end)
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({
-    Name = "Jam Hub | Bee Swarm Simulator",
+    Name = "RBScr1pts Hub - v1.4.2",
     HidePremium = false,
     SaveConfig = true,
-    ConfigFolder = "Jam Hub | Bee Swarm Simulator",
+    ConfigFolder = "RBScr1ptsHub - Bee Swarm Simulator",
     IntroEnabled = true,
-    IntroText = "Bee Swarm Simulator"
+    IntroText = "RBScr1pts - Bee Swarm Simulator"
 })
 
+-- Main / First
 local Main = Window:MakeTab({
 	Name = "Main",
 	Icon = "",
 	PremiumOnly = false
 })
 
-local discordinvite = "https://discord.com/invite/Z9Tq577qan"
+Main:AddParagraph("Scripters:","Krires + why_y0u")
+
+Main:AddLabel("Join us discord for information about updates!")
+
+local discordinvite = "discord.gg/CjDHnCp5Ss - click to copy"
 
 Main:AddButton({
-	Name = "Join My Discord",
+	Name = "Discord!",
 	Callback = function()
         setclipboard(discordinvite)
   	end    
@@ -92,18 +98,39 @@ local Extra = Window:MakeTab({
 	PremiumOnly = false
 })
 
+local Webhook = Window:MakeTab({
+    Name = "Webhook",
+    Icon = "",
+    PremiumOnly = false
+})
+
 local Settings = Window:MakeTab({
     Name = "Settings",
     Icon = "",
     PremiumOnly = false
 })
 
+Settings:AddBind({
+        Name = "Toggle Gui",
+        Default = Enum.KeyCode.LeftControl,
+        Hold = false,
+        Callback = function()
+            if game.CoreGui.Orion.Enabled == true then
+                game.CoreGui.Orion.Enabled = false
+            elseif game.CoreGui.Orion.Enabled == false then
+                game.CoreGui.Orion.Enabled = true
+            end
+        end 
+    })
+
+
+--Farm / Two
 local Section = Farm:AddSection({
-	Name = "Auto Farming"
+	Name = "Farm"
 })
 
 Farm:AddToggle({
-    Name = "Auto Digging",
+    Name = "Auto Dig",
     Default = false,
     Callback = function(Value)
         togglestore.AutoDig = Value
@@ -1912,11 +1939,54 @@ function sendWebhookUpdates()
                 "Old Honey: %d\nNew Honey: %d\nHoney Profit: %d\n\nCapacity: %d\nPollen: %d",
                 initialHoney, currentHoney, honeyProfit, capacity, pollen
             )
+            
+            local data = {
+                ["content"] = message
+            }
+            
+            local headers = {
+                ["Content-Type"] = "application/json"
+            }
+            
+            local success, response = pcall(function()
+                return (syn and syn.request or http_request or request or HttpPost or http.request) {
+                    Url = webhookURL,
+                    Method = "POST",
+                    Headers = headers,
+                    Body = game:GetService("HttpService"):JSONEncode(data)
+                }
+            end)
+            
+            if success then
+                print("Webhook sent successfully")
+                print("Response:", response.Body)
+            else
+                print("Failed to send webhook")
+                print("Error:", response)
+            end
+            
+            wait(webhookInterval)
+        end
+    end)
+end
 
-local player = game.Players.LocalPlayer
-local virtualUser = game:GetService("VirtualUser")
-
-player.Idled:Connect(function()
-    virtualUser:CaptureController()
-    virtualUser:ClickButton2(Vector2.new(0, 0))
-end)
+-- AntiAfk Scripts
+wait(0.5)local ba=Instance.new("ScreenGui")
+local ca=Instance.new("TextLabel")local da=Instance.new("Frame")
+local _b=Instance.new("TextLabel")local ab=Instance.new("TextLabel")ba.Parent=game.CoreGui
+ba.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;ca.Parent=ba;ca.Active=true
+ca.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ca.Draggable=true
+ca.Position=UDim2.new(5.698610067,0,0.098096624,0)ca.Size=UDim2.new(0,150,0,52)
+ca.Font=Enum.Font.SourceSansSemibold;ca.Text="Anti AFK Script"ca.TextColor3=Color3.new(0,1,1)
+ca.TextSize=22;da.Parent=ca
+da.BackgroundColor3=Color3.new(0.196078,0.196078,0.196078)da.Position=UDim2.new(0,0,1.0192306,0)
+da.Size=UDim2.new(0,150,0,57)_b.Parent=da
+_b.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)_b.Position=UDim2.new(0,0,0.800455689,0)
+_b.Size=UDim2.new(0,150,0,21)_b.Font=Enum.Font.Arial;_b.Text="RBScr1pts"
+_b.TextColor3=Color3.new(0,1,1)_b.TextSize=20;ab.Parent=daaaaaaaaaa
+ab.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ab.Position=UDim2.new(0,0,0.158377,0)
+ab.Size=UDim2.new(0,150,0,44)ab.Font=Enum.Font.ArialBold;ab.Text="Status: Active"
+ab.TextColor3=Color3.new(0,1,1)ab.TextSize=20;local bb=game:service'VirtualUser'
+game:service'Players'.LocalPlayer.Idled:connect(function()
+bb:CaptureController()bb:ClickButton2(Vector2.new())
+ab.Text="Roblox Tried to kick you but we didnt let them kick you :D"wait(2)ab.Text="Status : Active"end)
