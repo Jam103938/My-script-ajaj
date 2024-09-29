@@ -133,8 +133,8 @@ end
 
 
 Tab:AddButton({
-	Name = "Button!",
-	Callback = function()
+	Name = "Silent aim",
+	Callback = function(value)
     local Camera = game:GetService("Workspace").CurrentCamera
 local Players = game:GetService("Players")
 local LocalPlayer = game:GetService("Players").LocalPlayer
@@ -186,7 +186,7 @@ end
 
 Tab:AddButton({
 	Name = "Button!",
-	Callback = function()
+	Callback = function(value)
    aimbotEnabled = Value
 		if aimbotEnabled then
 			aimAtTarget()
@@ -197,7 +197,7 @@ Tab:AddButton({
 
 Tab:AddButton({
 	Name = "Button!",
-	Callback = function()
+	Callback = function(value)
    wallCheckEnabled = Value
 end    
 })
@@ -206,7 +206,7 @@ end
 
 Tab:AddButton({
 	Name = "Button!",
-	Callback = function()
+	Callback = function(value)
     getgenv().Walkspeed = value
     pcall(function()
         game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -219,7 +219,7 @@ end
 
 Tab:AddButton({
 	Name = "Button!",
-	Callback = function()
+	Callback = function(value)
     getgenv().loopW = state
     game:GetService("RunService").Heartbeat:Connect(function()
         if loopW == true then
@@ -233,7 +233,7 @@ end
 
 Tab:AddButton({
 	Name = "Button!",
-	Callback = function()
+	Callback = function(value)
 	_G.HeadSize = value
 _G.Disabled = true
  
