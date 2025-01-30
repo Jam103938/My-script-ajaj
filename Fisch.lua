@@ -5,9 +5,9 @@ local Window = Fluent:CreateWindow({
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Acrylic = true,
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when there's no MinimizeKeybind
+    MinimizeKey = Enum.KeyCode.LeftControl
 })
 
 local Tabs = {
@@ -40,7 +40,7 @@ local function autoEquipRod()
                 break
             end
         end
-        task.wait(0.4) -- Change cooldown speed
+        task.wait(0.4)
     end
 end
 
@@ -113,14 +113,13 @@ local originalAutoShake = autoShake
 
 if hookfunction then
     autoShake = hookfunction(autoShake, function(...)
-        
         return originalAutoShake(...)
     end)
 elseif getgenv and type(getgenv) == "function" then
     getgenv().autoShake = function(...)
         return originalAutoShake(...)
     end
-
+end
 
 Tabs.Main:AddToggle("AutoFishToggle", {
     Title = "Auto Fish",
